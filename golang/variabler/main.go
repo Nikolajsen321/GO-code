@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+	routesAPI "variabler/api_endpoint"
 	variable "variabler/variableFolder"
 )
 
@@ -25,6 +27,9 @@ func main() {
 
 	fmt.Printf("Hvis du indsætter %v med en rente på %v over %v år  får man %v",
 		startKapital, rente, aar, slutKapital2)
+
+	routesAPI.MyRoutes()
+	http.ListenAndServe(":8080", nil)
 
 }
 
