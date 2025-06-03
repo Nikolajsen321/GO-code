@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	routesAPI "variabler/api_endpoint"
+	"variabler/gin_api_endpoint"
 	variable "variabler/variableFolder"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -28,8 +29,14 @@ func main() {
 	fmt.Printf("Hvis du indsætter %v med en rente på %v over %v år  får man %v",
 		startKapital, rente, aar, slutKapital2)
 
-	routesAPI.MyRoutes()
-	http.ListenAndServe(":8080", nil)
+	//API uden gin
+	// routesAPI.MyRoutes()
+	// http.ListenAndServe(":8080", nil)
+
+	//API kald med gin
+	ro := gin.Default()
+	gin_api_endpoint.SetupRoutes(ro)
+	ro.Run(":8080")
 
 }
 
@@ -38,4 +45,11 @@ GO comandos:
 go run main.go  fx hvis man er i mappen
 go run ../main.go  fx hvis man er i en sub mappe af den mappe main ligger i
 go run ./  hvis mappen indholder en main package
+
+
+
+Install gin:
+go get -u github.com/gin-gonic/gin
+
+
 */
